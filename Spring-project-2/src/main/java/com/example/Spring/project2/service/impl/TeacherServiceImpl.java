@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -92,7 +93,9 @@ public class TeacherServiceImpl implements TeacherService {
         if(subject.isEmpty()) {
             throw new NotFoundException(subjectName + " not found", HttpStatus.NOT_FOUND);
         }
-        teacher.get().setEnrolSubjectsToTeachers(Collections.singleton(subject.get()));
+        Set<Subject> enrolSubject = teacher.get().getEnrolSubjectsToTeachers();
+        enrolSubject.add(subject.get());
+        teacher.get().setEnrolSubjectsToTeachers(enrolSubject);
         teacherRepository.save(teacher.get());
     }
 }

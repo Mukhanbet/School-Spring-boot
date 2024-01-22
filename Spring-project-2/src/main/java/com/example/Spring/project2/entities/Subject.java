@@ -27,6 +27,7 @@ public class Subject {
     @ManyToMany(mappedBy = "enrolSubjectsToTeachers", cascade = CascadeType.ALL)
     private Set<Teacher> teachers;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "School",referencedColumnName = "name") // todo here is the warn!
     private School enrolSubjectToSchool;
 }

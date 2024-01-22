@@ -47,7 +47,7 @@ public class Student {
     private School enrolStudentsToSchool;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "teacher_name", referencedColumnName = "email") // todo here should be the name instead of email!!!
     private Teacher teacher;
 
     @ManyToMany(cascade = CascadeType.ALL)

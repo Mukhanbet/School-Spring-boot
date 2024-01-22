@@ -41,6 +41,7 @@ public class Teacher {
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school", referencedColumnName = "name")
     private School enrolTeachersToSchool;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
@@ -51,8 +52,8 @@ public class Teacher {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "subject_enrolled",
-            joinColumns = @JoinColumn(name = "teacher"),
-            inverseJoinColumns = @JoinColumn(name = "subject")
+            joinColumns = @JoinColumn(name = "teacher", referencedColumnName = "name"),
+            inverseJoinColumns = @JoinColumn(name = "subject", referencedColumnName = "name")
     )
     private Set<Subject> enrolSubjectsToTeachers = new HashSet<>();
 }

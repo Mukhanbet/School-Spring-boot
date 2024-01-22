@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,7 +31,7 @@ public class School {
 //    @JoinColumn(name = "teachers", referencedColumnName = "name")
     private List<Teacher> teachers;
 
-    @OneToOne(mappedBy = "enrolSubjectToSchool", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "enrolSubjectToSchool", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "subject", referencedColumnName = "name")
-    private Subject subject;
+    private Set<Subject> subject = new HashSet<>();
 }

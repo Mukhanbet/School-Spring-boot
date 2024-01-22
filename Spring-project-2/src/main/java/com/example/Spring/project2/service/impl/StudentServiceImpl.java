@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -85,7 +86,9 @@ public class StudentServiceImpl implements StudentService {
         if(subject.isEmpty()) {
             throw new NotFoundException(subjectName + " not found! ", HttpStatus.NOT_FOUND);
         }
-        student.get().setEnrolSubjectsToStudents(Collections.singleton(subject.get()));
+        Set<Subject> enrolSubject = student.get().getEnrolSubjectsToStudents();
+        enrolSubject.add(subject.get());
+        student.get().setEnrolSubjectsToStudents(enrolSubject);
         studentRepository.save(student.get());
         // todo: Is this relationship correct???
     }
